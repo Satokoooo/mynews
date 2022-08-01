@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Profile;
-use App\Profile_history;
-use Carbon\carbon;
 
 class ProfileController extends Controller
 {
@@ -17,7 +15,7 @@ class ProfileController extends Controller
 }
 
 public function create(Request $request){
-    // Varidationを行う
+    // Validationを行う
     $this->validate($request, Profile::$rules);
     
     $profile = new profile;
@@ -53,11 +51,27 @@ public function update(Request $request){
     
     //該当データを上書きして保存する
     $profile->fill($profile_form)->save();
+<<<<<<<<< saved version
+    //該当データを上書きして保存する
+    $profile->fill($profile_form)->save();
     
     $profile_history = new Profile_history();
     $profile_history->profile_id = $profile->id;
     $profile_history->edited_at = Carbon::now();
     $profile_history->save();
+=========
+    //該当データを上書きして保存する
+    $profile->fill($profile_form)->save();
+<<<<<<<<< saved version
+
+=========
+    
+    $profile_history = new Profile_history();
+    $profile_history->profile_id = $profile->id;
+    $profile_history->edited_at = Carbon::now();
+    $profile_history->save();
+>>>>>>>>> local version
+>>>>>>>>> local version
     
     return redirect('admin/profile/create');
 }
